@@ -1,1 +1,56 @@
 @import "tailwindcss";
+
+@-webkit-keyframes blob {
+  0% {
+    -webkit-transform: translate(0px, 0px) scale(1);
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    -webkit-transform: translate(30px, -50px) scale(1.1);
+    transform: translate(30px, -50px) scale(1.1);
+  }
+  66% {
+    -webkit-transform: translate(-20px, 20px) scale(0.9);
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+  100% {
+    -webkit-transform: translate(0px, 0px) scale(1);
+    transform: translate(0px, 0px) scale(1);
+  }
+}
+
+@keyframes blob {
+  0% {
+    -webkit-transform: translate(0px, 0px) scale(1);
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    -webkit-transform: translate(30px, -50px) scale(1.1);
+    transform: translate(30px, -50px) scale(1.1);
+  }
+  66% {
+    -webkit-transform: translate(-20px, 20px) scale(0.9);
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+  100% {
+    -webkit-transform: translate(0px, 0px) scale(1);
+    transform: translate(0px, 0px) scale(1);
+  }
+}
+
+.animate-blob {
+  -webkit-animation: blob 7s infinite;
+  animation: blob 7s infinite;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
+
+.animation-delay-6000 {
+  animation-delay: 6s;
+}
