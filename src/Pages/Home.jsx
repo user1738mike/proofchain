@@ -11,6 +11,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { motion } from "framer-motion";
 import "tailwindcss";
+import Border from "../components/magicui/border-beam"
 
 const navigation = [
   { name: "Solutions", href: "#" },

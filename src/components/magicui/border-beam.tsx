@@ -1,5 +1,6 @@
 "use client";
 
+import * as React from "react";
 import { cn } from "@/lib/utils";
 import { motion, MotionStyle, Transition } from "motion/react";
 
@@ -92,3 +93,5 @@ export const BorderBeam = ({
     </div>
   );
 };
+
+export default BorderBeam;
