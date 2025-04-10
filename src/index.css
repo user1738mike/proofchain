@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+body{
+  font-family: 'Outfit', sans-serif;
+}
+
 @-webkit-keyframes blob {
   0% {
     -webkit-transform: translate(0px, 0px) scale(1);

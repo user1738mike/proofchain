@@ -44,19 +44,19 @@ export default function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <div className="bg-black min-h-screen relative overflow-hidden">
+    <div className=" min-h-screen relative overflow-hidden">
       {/* Gradient corners */}
       <div className="absolute top-0 left-0 w-96 h-96 bg-purple-900 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
       <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-900 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-900 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"></div>
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-violet-900 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-6000"></div>
 
-      <header className="fixed inset-x-0 top-0 z-50 bg-black bg-opacity-80 backdrop-blur-md border-b border-gray-800">
+      <header className="inset-x-0 top-0 z-50 bg-grey-400 backdrop-blur-md ">
         <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
           <div className="flex lg:flex-1">
             <a
               href="#"
-              className="flex items-center gap-2 text-indigo-400 font-bold text-lg"
+              className="flex items-center gap-2 text-black font-bold text-lg"
             >
               <ShieldCheckIcon className="h-6 w-6" />
               ProofChain
@@ -65,7 +65,7 @@ export default function App() {
           <div className="flex lg:hidden">
             <button
               onClick={() => setMobileMenuOpen(true)}
-              className="inline-flex items-center justify-center p-2 text-gray-400"
+              className="inline-flex items-center justify-center p-2 text-black"
             >
               <Bars3Icon className="h-6 w-6" />
             </button>
@@ -75,7 +75,7 @@ export default function App() {
               <a
                 key={item.name}
                 href={item.href}
-                className="text-sm font-medium text-gray-300 hover:text-indigo-400"
+                className="text-sm font-medium text-black hover:text-indigo-400"
               >
                 {item.name}
               </a>
@@ -84,7 +84,7 @@ export default function App() {
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
             <a
               href="#"
-              className="text-sm font-semibold text-indigo-400 hover:underline"
+              className="text-sm font-semibold text-black hover:underline"
             >
               Login →
             </a>
@@ -97,18 +97,18 @@ export default function App() {
           onClose={setMobileMenuOpen}
           className="lg:hidden"
         >
-          <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full max-w-sm bg-gray-900 shadow-lg p-6">
+          <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full max-w-sm  shadow-lg p-6">
             <div className="flex items-center justify-between">
               <a
                 href="#"
-                className="flex items-center gap-2 text-indigo-400 font-bold text-lg"
+                className="flex items-center gap-2 text-black font-bold text-lg"
               >
                 <ShieldCheckIcon className="h-6 w-6" />
                 ProofChain
               </a>
               <button
                 onClick={() => setMobileMenuOpen(false)}
-                className="text-gray-400"
+                className="text-black"
               >
                 <XMarkIcon className="h-6 w-6" />
               </button>
@@ -118,12 +118,12 @@ export default function App() {
                 <a
                   key={item.name}
                   href={item.href}
-                  className="block text-gray-300 font-medium"
+                  className="block text-black font-medium"
                 >
                   {item.name}
                 </a>
               ))}
-              <a href="#" className="block text-indigo-400 font-semibold mt-4">
+              <a href="#" className="block text-black font-semibold mt-4">
                 Login
               </a>
             </div>
@@ -134,7 +134,7 @@ export default function App() {
       {/* Hero Section */}
       <main className="pt-32 pb-24 px-6 text-center max-w-4xl mx-auto relative z-10">
         <motion.h1
-          className="text-4xl font-bold tracking-tight text-white sm:text-5xl"
+          className="text-4xl font-bold tracking-tight text-black sm:text-5xl"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
@@ -142,7 +142,7 @@ export default function App() {
           Reclaim Your Reputation on the Blockchain
         </motion.h1>
         <motion.p
-          className="mt-6 text-lg text-gray-300"
+          className="mt-6 text-lg text-black"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
@@ -158,20 +158,20 @@ export default function App() {
         >
           <a
             href="#"
-            className="rounded-md bg-indigo-600 px-6 py-3 text-white font-semibold hover:bg-indigo-500 transition"
+            className="rounded-md bg-indigo-600 px-6 py-3 text-black font-semibold hover:bg-indigo-500 transition"
           >
             Launch App
           </a>
-          <a href="#" className="text-indigo-400 font-semibold hover:underline">
+          <a href="#" className="text-black font-semibold hover:underline">
             Learn More →
           </a>
         </motion.div>
       </main>
 
       {/* Features Section */}
-      <section className="bg-gray-900 bg-opacity-60 py-20 px-6 relative z-10">
+      <section className=" bg-opacity-60 py-20 px-6 relative z-10">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-center text-2xl font-bold text-white mb-12">
+          <h2 className="text-center text-2xl font-bold text-black mb-12">
             Why ProofChain?
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
@@ -188,9 +188,7 @@ export default function App() {
                 <h3 className="text-lg font-semibold text-white">
                   {benefit.title}
                 </h3>
-                <p className="text-sm text-gray-300 mt-2">
-                  {benefit.description}
-                </p>
+                <p className="text-sm text-black mt-2">{benefit.description}</p>
               </motion.div>
             ))}
           </div>
@@ -198,7 +196,7 @@ export default function App() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-black bg-opacity-80 border-t border-gray-800 py-10 text-center text-sm text-gray-400 relative z-10">
+      <footer className=" bg-opacity-80 border-t border-gray-800 py-10 text-center text-sm text-black relative z-10">
         © {new Date().getFullYear()} ProofChain Inc. All rights reserved.
       </footer>
     </div>
