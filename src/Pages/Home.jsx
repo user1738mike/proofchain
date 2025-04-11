@@ -13,6 +13,12 @@ import { motion } from "framer-motion";
 import "tailwindcss";
 import Border from "../components/magicui/border-beam";
 
+const navigation = [
+  { name: "Solutions", href: "#" },
+  { name: "Use Cases", href: "#" },
+  { name: "About Us", href: "#" },
+  { name: "Contact", href: "#" },
+];
 
 const benefits = [
   {
@@ -46,10 +52,9 @@ export default function App() {
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-900 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"></div>
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-violet-900 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-6000"></div>
 
-      {/* Using the imported Nav component instead of custom navigation */}
       <header className="inset-x-0 top-0 z-40 bg-grey-400 backdrop-blur-md">
-        <Nav
-          logo={
+        <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
+          <div className="flex lg:flex-1">
             <a
               href="#"
               className="flex items-center gap-2 text-black font-bold text-lg"
@@ -57,10 +62,76 @@ export default function App() {
               <ShieldCheckIcon className="h-6 w-6" />
               ProofChain
             </a>
-          }
-          mobileMenuOpen={mobileMenuOpen}
-          setMobileMenuOpen={setMobileMenuOpen}
-        />
+          </div>
+          <div className="flex lg:hidden">
+            <button
+              onClick={() => setMobileMenuOpen(true)}
+              className="inline-flex items-center justify-center p-2 text-black"
+            >
+              <Bars3Icon className="h-6 w-6" />
+            </button>
+          </div>
+          <div className="hidden lg:flex lg:gap-x-12">
+            {navigation.map((item) => (
+              <a
+                key={item.name}
+                href={item.href}
+                className="text-sm font-medium text-black hover:text-indigo-400 relative"
+              >
+                {item.name}
+              </a>
+            ))}
+          </div>
+          <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+            <a
+              href="#"
+              className="text-sm font-semibold text-black hover:underline"
+            >
+              Login →
+            </a>
+          </div>
+        </nav>
+
+        {/* Mobile Menu */}
+        <Dialog
+          open={mobileMenuOpen}
+          onClose={setMobileMenuOpen}
+          className="lg:hidden"
+        >
+          <div
+            className="fixed inset-0 bg-black/30 z-[90]"
+            aria-hidden="true"
+          />
+          <Dialog.Panel className="fixed inset-y-0 right-0 z-[110] w-full max-w-sm shadow-lg p-6 bg-white bg-opacity-90 backdrop-blur-md">
+            <div className="flex items-center justify-between">
+              <a
+                href="#"
+                className="flex items-center gap-2 text-black font-bold text-lg"
+              >
+                <ShieldCheckIcon className="h-6 w-6" />
+                ProofChain
+              </a>
+              <button
+                onClick={() => setMobileMenuOpen(false)}
+                className="text-black"
+              >
+                <XMarkIcon className="h-6 w-6" />
+              </button>
+            </div>
+            <div className="mt-6 space-y-4">
+              {navigation.map((item) => (
+                <div key={item.name}>
+                  <a href={item.href} className="block text-black font-medium">
+                    {item.name}
+                  </a>
+                </div>
+              ))}
+              <a href="#" className="block text-black font-semibold mt-4">
+                Login
+              </a>
+            </div>
+          </Dialog.Panel>
+        </Dialog>
       </header>
 
       {/* Hero Section */}
