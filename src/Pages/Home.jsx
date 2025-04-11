@@ -45,7 +45,7 @@ export default function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <div className=" min-h-screen relative overflow-hidden">
+    <div className="bg-[#6bd6ff] min-h-screen relative overflow-hidden">
       {/* Gradient corners */}
       <div className="absolute top-0 left-0 w-96 h-96 bg-purple-900 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
       <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-900 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
@@ -135,7 +135,7 @@ export default function App() {
       {/* Hero Section */}
       <main className="pt-32 pb-24 px-6 text-center max-w-4xl mx-auto relative z-10">
         <motion.h1
-          className="text-4xl font-bold tracking-tight text-black sm:text-5xl"
+          className="text-5xl font-bold tracking-tight text-black sm:text-6xl md:text-7xl"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
@@ -143,7 +143,7 @@ export default function App() {
           Reclaim Your Reputation on the Blockchain
         </motion.h1>
         <motion.p
-          className="mt-6 text-lg text-black"
+          className="mt-6 text-xl text-black"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
