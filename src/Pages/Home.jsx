@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 // App.jsx
-import React, { useState } from "react";
-import { Dialog } from "@headlessui/react";
+import React, { useState, Fragment } from "react";
+import { Dialog, Transition } from "@headlessui/react";
 import {
   Bars3Icon,
   XMarkIcon,
@@ -153,11 +153,12 @@ export default function App() {
           ProofChain helps professionals and teams create verifiable skill NFTs
           backed by on-chain data.
         </motion.p>
+
         <motion.div
           className="mt-8 flex justify-center gap-4"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.6 }}
+          transition={{ delay: 0.7 }}
         >
           <a
             href="#"
