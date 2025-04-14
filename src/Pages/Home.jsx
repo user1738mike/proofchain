@@ -21,7 +21,11 @@ import VisionCards from "../components/VisionCards";
 import TextAnimate from "../components/magicui/TextAnimate";
 import PulsatingButton from "../components/magicui/PulsatingButton";
 import BentoGrid from "../components/magicui/BentoGrid";
-import { FlyoutLink, SolutionsContent, UseCasesContent } from "../components/magicui/FlyoutMenu";
+import {
+  FlyoutLink,
+  SolutionsContent,
+  UseCasesContent,
+} from "../components/magicui/FlyoutMenu";
 
 const navigation = [
   { name: "Solutions", href: "#", content: SolutionsContent },
@@ -70,7 +74,8 @@ const bentoItems = [
   },
   {
     title: "Lightning Fast",
-    description: "Instant verification and minting. No more waiting for paperwork.",
+    description:
+      "Instant verification and minting. No more waiting for paperwork.",
     icon: <BoltIcon className="h-6 w-6" />,
     iconClassName: "bg-yellow-500/10 text-yellow-500",
   },
@@ -131,10 +136,10 @@ export default function App() {
             </button>
           </div>
           <div className="hidden lg:flex lg:gap-x-12">
-            {navigation.map((item) => (
+            {navigation.map((item) =>
               item.content ? (
-                <FlyoutLink 
-                  key={item.name} 
+                <FlyoutLink
+                  key={item.name}
                   href={item.href}
                   FlyoutContent={item.content}
                 >
@@ -149,7 +154,7 @@ export default function App() {
                   {item.name}
                 </a>
               )
-            ))}
+            )}
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
             <a
@@ -175,7 +180,7 @@ export default function App() {
             onClick={() => setMobileMenuOpen(false)}
             aria-hidden="true"
           />
-          <Dialog.Panel 
+          <Dialog.Panel
             as={motion.div}
             initial={{ x: "100%" }}
             animate={{ x: 0 }}
@@ -200,17 +205,17 @@ export default function App() {
                 </button>
               </div>
 
-              <motion.div 
+              <motion.div
                 className="flex-1 overflow-y-auto py-6 px-6"
                 initial="closed"
                 animate="open"
                 variants={{
                   open: {
-                    transition: { staggerChildren: 0.1, delayChildren: 0.2 }
+                    transition: { staggerChildren: 0.1, delayChildren: 0.2 },
                   },
                   closed: {
-                    transition: { staggerChildren: 0.05, staggerDirection: -1 }
-                  }
+                    transition: { staggerChildren: 0.05, staggerDirection: -1 },
+                  },
                 }}
               >
                 <nav className="space-y-2">
@@ -219,11 +224,11 @@ export default function App() {
                       key={item.name}
                       variants={{
                         open: { x: 0, opacity: 1 },
-                        closed: { x: 50, opacity: 0 }
+                        closed: { x: 50, opacity: 0 },
                       }}
                     >
-                      <a 
-                        href={item.href} 
+                      <a
+                        href={item.href}
                         className="block w-full p-4 text-black font-medium rounded-xl hover:bg-black/5 transition-colors relative overflow-hidden group"
                       >
                         <span className="relative z-10">{item.name}</span>
@@ -280,9 +285,7 @@ export default function App() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.7 }}
           >
-            <PulsatingButton>
-              Claim Your SkillNFT
-            </PulsatingButton>
+            <PulsatingButton>Claim Your SkillNFT</PulsatingButton>
             <a
               href="#"
               className="rounded-md px-6 py-3 text-black font-semibold hover:bg-black/5 transition"

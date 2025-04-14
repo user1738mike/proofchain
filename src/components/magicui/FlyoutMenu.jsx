@@ -13,7 +13,10 @@ export const FlyoutLink = ({ children, href, FlyoutContent }) => {
       onMouseLeave={() => setOpen(false)}
       className="relative w-fit h-fit"
     >
-      <a href={href} className="relative text-black hover:text-indigo-600 transition-colors">
+      <a
+        href={href}
+        className="relative text-black hover:text-indigo-600 transition-colors"
+      >
         {children}
         <span
           style={{
@@ -49,22 +52,37 @@ export const SolutionsContent = () => {
     <div className="w-64 p-6">
       <div className="mb-3 space-y-3">
         <h3 className="font-semibold text-black">For Individuals</h3>
-        <a href="#" className="block text-sm text-black/70 hover:text-indigo-600 hover:bg-black/5 rounded-lg px-2 py-1 transition-colors">
+        <a
+          href="#"
+          className="block text-sm text-black/70 hover:text-indigo-600 hover:bg-black/5 rounded-lg px-2 py-1 transition-colors"
+        >
           Skill Verification
         </a>
-        <a href="#" className="block text-sm text-black/70 hover:text-indigo-600 hover:bg-black/5 rounded-lg px-2 py-1 transition-colors">
+        <a
+          href="#"
+          className="block text-sm text-black/70 hover:text-indigo-600 hover:bg-black/5 rounded-lg px-2 py-1 transition-colors"
+        >
           Portfolio Builder
         </a>
       </div>
       <div className="mb-6 space-y-3">
         <h3 className="font-semibold text-black">For Companies</h3>
-        <a href="#" className="block text-sm text-black/70 hover:text-indigo-600 hover:bg-black/5 rounded-lg px-2 py-1 transition-colors">
+        <a
+          href="#"
+          className="block text-sm text-black/70 hover:text-indigo-600 hover:bg-black/5 rounded-lg px-2 py-1 transition-colors"
+        >
           Talent Verification
         </a>
-        <a href="#" className="block text-sm text-black/70 hover:text-indigo-600 hover:bg-black/5 rounded-lg px-2 py-1 transition-colors">
+        <a
+          href="#"
+          className="block text-sm text-black/70 hover:text-indigo-600 hover:bg-black/5 rounded-lg px-2 py-1 transition-colors"
+        >
           Enterprise Solutions
         </a>
-        <a href="#" className="block text-sm text-black/70 hover:text-indigo-600 hover:bg-black/5 rounded-lg px-2 py-1 transition-colors">
+        <a
+          href="#"
+          className="block text-sm text-black/70 hover:text-indigo-600 hover:bg-black/5 rounded-lg px-2 py-1 transition-colors"
+        >
           API Access
         </a>
       </div>
@@ -80,16 +98,28 @@ export const UseCasesContent = () => {
     <div className="w-64 p-6">
       <div className="mb-6 space-y-3">
         <h3 className="font-semibold text-black">Popular Use Cases</h3>
-        <a href="#" className="block text-sm text-black/70 hover:text-indigo-600 hover:bg-black/5 rounded-lg px-2 py-1 transition-colors">
+        <a
+          href="#"
+          className="block text-sm text-black/70 hover:text-indigo-600 hover:bg-black/5 rounded-lg px-2 py-1 transition-colors"
+        >
           Developer Credentials
         </a>
-        <a href="#" className="block text-sm text-black/70 hover:text-indigo-600 hover:bg-black/5 rounded-lg px-2 py-1 transition-colors">
+        <a
+          href="#"
+          className="block text-sm text-black/70 hover:text-indigo-600 hover:bg-black/5 rounded-lg px-2 py-1 transition-colors"
+        >
           Academic Verification
         </a>
-        <a href="#" className="block text-sm text-black/70 hover:text-indigo-600 hover:bg-black/5 rounded-lg px-2 py-1 transition-colors">
+        <a
+          href="#"
+          className="block text-sm text-black/70 hover:text-indigo-600 hover:bg-black/5 rounded-lg px-2 py-1 transition-colors"
+        >
           Professional Certifications
         </a>
-        <a href="#" className="block text-sm text-black/70 hover:text-indigo-600 hover:bg-black/5 rounded-lg px-2 py-1 transition-colors">
+        <a
+          href="#"
+          className="block text-sm text-black/70 hover:text-indigo-600 hover:bg-black/5 rounded-lg px-2 py-1 transition-colors"
+        >
           Background Checks
         </a>
       </div>
