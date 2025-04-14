@@ -16,6 +16,7 @@ import AnimatedGrid from "../components/magicui/AnimatedGrid";
 import VerificationTicker from "../components/VerificationTicker";
 import VisionCards from "../components/VisionCards";
 import TextAnimate from "../components/magicui/TextAnimate";
+import PulsatingButton from "../components/magicui/PulsatingButton";
 
 const navigation = [
   { name: "Solutions", href: "#" },
@@ -163,12 +164,9 @@ export default function App() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.7 }}
         >
-          <a
-            href="#"
-            className="rounded-md bg-indigo-600 px-6 py-3 text-white font-semibold hover:bg-indigo-500 transition"
-          >
+          <PulsatingButton>
             Claim Your SkillNFT
-          </a>
+          </PulsatingButton>
           <a
             href="#"
             className="rounded-md px-6 py-3 text-black font-semibold hover:bg-black/5 transition"
