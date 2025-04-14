@@ -26,7 +26,12 @@ const BentoGrid = ({ items, className }) => {
         >
           <div className="relative z-10">
             <div className="flex items-center justify-between">
-              <span className={cn("inline-block rounded-lg p-3", item.iconClassName)}>
+              <span
+                className={cn(
+                  "inline-block rounded-lg p-3",
+                  item.iconClassName
+                )}
+              >
                 {item.icon}
               </span>
               {item.label && (
@@ -51,7 +56,8 @@ const BentoGrid = ({ items, className }) => {
             initial={{ backgroundPosition: "0% 100%" }}
             whileHover={{ backgroundPosition: "100% 0%" }}
             style={{
-              background: "linear-gradient(45deg, transparent 50%, rgba(68, 51, 238, 0.1) 100%)",
+              background:
+                "linear-gradient(45deg, transparent 50%, rgba(68, 51, 238, 0.1) 100%)",
               backgroundSize: "200% 200%",
             }}
           />
