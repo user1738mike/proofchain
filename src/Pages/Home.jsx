@@ -12,6 +12,7 @@ import {
 import { motion } from "framer-motion";
 import "tailwindcss";
 import Border from "../components/magicui/border-beam";
+import GeometricMesh from "../components/magicui/GeometricMesh";
 
 const navigation = [
   { name: "Solutions", href: "#" },
@@ -46,6 +47,9 @@ export default function App() {
 
   return (
     <div className="bg-[#6bd6ff] min-h-screen relative overflow-hidden">
+      {/* Geometric Mesh Background - Desktop Only */}
+      <GeometricMesh />
+
       {/* Gradient corners */}
       <div className="absolute top-0 left-0 w-96 h-96 bg-purple-900 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
       <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-900 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
@@ -142,7 +146,7 @@ export default function App() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          Reclaim Your Reputation on the Blockchain
+          Your Skills, On-Chain. Forever Yours.
         </motion.h1>
         <motion.p
           className="mt-6 text-xl text-black"
@@ -150,8 +154,7 @@ export default function App() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
         >
-          ProofChain helps professionals and teams create verifiable skill NFTs
-          backed by on-chain data.
+          ProofChain empowers you to own and verify your skills, work history, and reputation with cryptographic certainty.
         </motion.p>
 
         <motion.div
@@ -162,12 +165,15 @@ export default function App() {
         >
           <a
             href="#"
-            className="rounded-md bg-indigo-600 px-6 py-3 text-black font-semibold hover:bg-indigo-500 transition"
+            className="rounded-md bg-indigo-600 px-6 py-3 text-white font-semibold hover:bg-indigo-500 transition"
           >
-            Launch App
+            Claim Your SkillNFT
           </a>
-          <a href="#" className="text-black font-semibold hover:underline">
-            Learn More →
+          <a
+            href="#"
+            className="rounded-md px-6 py-3 text-black font-semibold hover:bg-black/5 transition"
+          >
+            Explore the Protocol
           </a>
         </motion.div>
       </main>
