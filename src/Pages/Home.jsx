@@ -12,7 +12,7 @@ import {
 import { motion } from "framer-motion";
 import "tailwindcss";
 import Border from "../components/magicui/border-beam";
-import GeometricMesh from "../components/magicui/GeometricMesh";
+import AnimatedGrid from "../components/magicui/AnimatedGrid";
 import VerificationTicker from "../components/VerificationTicker";
 import VisionCards from "../components/VisionCards";
 
@@ -49,8 +49,8 @@ export default function App() {
 
   return (
     <div className="bg-[#6bd6ff] min-h-screen relative overflow-hidden">
-      {/* Geometric Mesh Background - Desktop Only */}
-      <GeometricMesh />
+      {/* Animated Grid Background */}
+      <AnimatedGrid />
 
       {/* Gradient corners */}
       <div className="absolute top-0 left-0 w-96 h-96 bg-purple-900 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
