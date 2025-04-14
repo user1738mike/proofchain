@@ -1,38 +1,41 @@
 /* eslint-disable no-unused-vars */
-import React from 'react';
-import { motion } from 'framer-motion';
-import { 
-  KeyIcon, 
-  LinkIcon, 
-  GlobeAltIcon, 
-  CodeBracketIcon 
-} from '@heroicons/react/24/outline';
+import React from "react";
+import { motion } from "framer-motion";
+import {
+  KeyIcon,
+  LinkIcon,
+  GlobeAltIcon,
+  CodeBracketIcon,
+} from "@heroicons/react/24/outline";
 
 const visionCards = [
   {
     icon: KeyIcon,
     title: "Self-sovereign identity",
-    description: "Own your credentials. Control your data. Your identity, your rules.",
-    color: "from-blue-500/20 to-blue-600/20"
+    description:
+      "Own your credentials. Control your data. Your identity, your rules.",
+    color: "from-blue-500/20 to-blue-600/20",
   },
   {
     icon: LinkIcon,
     title: "Immutable Proofs",
-    description: "Cryptographically secured verifications that can't be tampered with.",
-    color: "from-purple-500/20 to-purple-600/20"
+    description:
+      "Cryptographically secured verifications that can't be tampered with.",
+    color: "from-purple-500/20 to-purple-600/20",
   },
   {
     icon: GlobeAltIcon,
     title: "Global Interoperability",
-    description: "Your skills and credentials, recognized anywhere in the world.",
-    color: "from-indigo-500/20 to-indigo-600/20"
+    description:
+      "Your skills and credentials, recognized anywhere in the world.",
+    color: "from-indigo-500/20 to-indigo-600/20",
   },
   {
     icon: CodeBracketIcon,
     title: "Open Protocol",
     description: "Built on open standards. Extensible. Community-driven.",
-    color: "from-cyan-500/20 to-cyan-600/20"
-  }
+    color: "from-cyan-500/20 to-cyan-600/20",
+  },
 ];
 
 const VisionCards = () => {
@@ -58,16 +61,14 @@ const VisionCards = () => {
             <h3 className="text-xl font-semibold text-black mb-2">
               {card.title}
             </h3>
-            <p className="text-black/70">
-              {card.description}
-            </p>
+            <p className="text-black/70">{card.description}</p>
           </div>
-          
+
           {/* Animated background gradient */}
           <motion.div
             className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent"
-            initial={{ x: '-100%' }}
-            whileHover={{ x: '100%' }}
+            initial={{ x: "-100%" }}
+            whileHover={{ x: "100%" }}
             transition={{ duration: 1, ease: "easeInOut" }}
           />
         </motion.div>
