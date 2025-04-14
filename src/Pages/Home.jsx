@@ -2,6 +2,7 @@
 // App.jsx
 import React, { useState, Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
+import { Link } from "react-router-dom";
 import {
   Bars3Icon,
   XMarkIcon,
@@ -119,13 +120,13 @@ export default function App() {
       <header className="inset-x-0 top-0 z-40 bg-grey-400 backdrop-blur-md absolute w-full">
         <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
           <div className="flex lg:flex-1">
-            <a
-              href="#"
+            <Link
+              to="/"
               className="flex items-center gap-2 text-black font-bold text-lg"
             >
               <ShieldCheckIcon className="h-6 w-6" />
               ProofChain
-            </a>
+            </Link>
           </div>
           <div className="flex lg:hidden">
             <button
@@ -190,13 +191,13 @@ export default function App() {
           >
             <div className="flex flex-col h-full">
               <div className="flex items-center justify-between p-6 border-b border-black/5">
-                <a
-                  href="#"
+                <Link
+                  to="/"
                   className="flex items-center gap-2 text-black font-bold text-lg"
                 >
                   <ShieldCheckIcon className="h-6 w-6" />
                   ProofChain
-                </a>
+                </Link>
                 <button
                   onClick={() => setMobileMenuOpen(false)}
                   className="p-2 text-black rounded-full hover:bg-black/5 transition-colors"
@@ -285,13 +286,15 @@ export default function App() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.7 }}
           >
-            <PulsatingButton>Claim Your SkillNFT</PulsatingButton>
-            <a
-              href="#"
+            <Link to="/claim-nft">
+              <PulsatingButton>Claim Your SkillNFT</PulsatingButton>
+            </Link>
+            <Link
+              to="/profile-setup"
               className="rounded-md px-6 py-3 text-black font-semibold hover:bg-black/5 transition"
             >
               Explore the Protocol
-            </a>
+            </Link>
           </motion.div>
         </div>
       </main>
