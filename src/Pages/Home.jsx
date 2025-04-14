@@ -13,6 +13,8 @@ import { motion } from "framer-motion";
 import "tailwindcss";
 import Border from "../components/magicui/border-beam";
 import GeometricMesh from "../components/magicui/GeometricMesh";
+import VerificationTicker from "../components/VerificationTicker";
+import VisionCards from "../components/VisionCards";
 
 const navigation = [
   { name: "Solutions", href: "#" },
@@ -154,7 +156,8 @@ export default function App() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
         >
-          ProofChain empowers you to own and verify your skills, work history, and reputation with cryptographic certainty.
+          ProofChain empowers you to own and verify your skills, work history,
+          and reputation with cryptographic certainty.
         </motion.p>
 
         <motion.div
@@ -177,6 +180,26 @@ export default function App() {
           </a>
         </motion.div>
       </main>
+
+      {/* Vision Cards Section */}
+      <section className="py-16 relative z-20">
+        <div className="text-center mb-12">
+          <motion.h2
+            className="text-3xl font-bold text-black"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            The Future of Professional Identity
+          </motion.h2>
+        </div>
+        <VisionCards />
+      </section>
+
+      {/* Social Proof Ticker */}
+      <div className="relative z-20">
+        <VerificationTicker />
+      </div>
 
       {/* Features Section */}
       <section className="py-20 px-6 relative z-10">
