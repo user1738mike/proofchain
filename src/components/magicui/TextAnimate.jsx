@@ -4,8 +4,8 @@ import { motion } from "framer-motion";
 import AuroraText from "./AuroraText";
 
 const TextAnimate = ({ text, className }) => {
-  const words = text.split(' ');
-  
+  const words = text.split(" ");
+
   return (
     <motion.h1
       className={className}
@@ -15,12 +15,8 @@ const TextAnimate = ({ text, className }) => {
     >
       {words.map((word, index) => (
         <React.Fragment key={index}>
-          {word === "Forever" ? (
-            <AuroraText>{word}</AuroraText>
-          ) : (
-            word
-          )}
-          {index < words.length - 1 ? ' ' : ''}
+          {word === "Forever" ? <AuroraText>{word}</AuroraText> : word}
+          {index < words.length - 1 ? " " : ""}
         </React.Fragment>
       ))}
     </motion.h1>
