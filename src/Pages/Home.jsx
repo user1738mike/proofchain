@@ -15,6 +15,7 @@ import Border from "../components/magicui/border-beam";
 import AnimatedGrid from "../components/magicui/AnimatedGrid";
 import VerificationTicker from "../components/VerificationTicker";
 import VisionCards from "../components/VisionCards";
+import TextAnimate from "../components/magicui/TextAnimate";
 
 const navigation = [
   { name: "Solutions", href: "#" },
@@ -142,14 +143,10 @@ export default function App() {
 
       {/* Hero Section */}
       <main className="pt-32 pb-24 px-6 text-center max-w-4xl mx-auto relative z-20">
-        <motion.h1
+        <TextAnimate
+          text="Your Skills, On-Chain. Forever Yours."
           className="text-5xl font-bold tracking-tight text-black sm:text-6xl md:text-7xl"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          Your Skills, On-Chain. Forever Yours.
-        </motion.h1>
+        />
         <motion.p
           className="mt-6 text-xl text-black"
           initial={{ opacity: 0 }}
