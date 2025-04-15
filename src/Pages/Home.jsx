@@ -20,7 +20,7 @@ import AnimatedGrid from "../components/magicui/AnimatedGrid";
 import VerificationTicker from "../components/VerificationTicker";
 import VisionCards from "../components/VisionCards";
 import TextAnimate from "../components/magicui/TextAnimate";
-import PulsatingButton from "../components/magicui/PulsatingButton";
+import NeuButton from "../components/magicui/NeuButton";
 import BentoGrid from "../components/magicui/BentoGrid";
 import {
   FlyoutLink,
@@ -287,7 +287,7 @@ export default function App() {
             transition={{ delay: 0.7 }}
           >
             <Link to="/claim-nft">
-              <PulsatingButton>Claim Your SkillNFT</PulsatingButton>
+              <NeuButton>Claim Your SkillNFT</NeuButton>
             </Link>
             <Link
               to="/profile-setup"

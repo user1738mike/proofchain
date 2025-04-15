@@ -29,7 +29,7 @@ const ClaimNFT = () => {
     <div className="min-h-screen bg-[#6bd6ff] relative overflow-hidden">
       {/* Background Elements */}
       <AnimatedGrid />
-      
+
       {/* Gradient corners */}
       <div className="absolute top-0 left-0 w-96 h-96 bg-purple-900 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
       <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-900 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
@@ -41,7 +41,10 @@ const ClaimNFT = () => {
         {/* Header */}
         <header className="w-full bg-white/10 backdrop-blur-md">
           <div className="max-w-7xl mx-auto px-4 py-6">
-            <Link to="/" className="flex items-center gap-2 text-black font-bold text-lg">
+            <Link
+              to="/"
+              className="flex items-center gap-2 text-black font-bold text-lg"
+            >
               <ShieldCheckIcon className="h-6 w-6" />
               ProofChain
             </Link>
@@ -55,10 +58,13 @@ const ClaimNFT = () => {
             transition={{ duration: 0.5 }}
             className="bg-white/80 backdrop-blur-md rounded-xl p-8 shadow-xl"
           >
-            <h1 className="text-3xl font-bold text-black mb-6">Claim Your Skill NFT</h1>
+            <h1 className="text-3xl font-bold text-black mb-6">
+              Claim Your Skill NFT
+            </h1>
             <p className="text-gray-600 mb-8">
-              Mint an NFT that represents your professional skills and achievements. 
-              Back your claims with certifications and portfolio work.
+              Mint an NFT that represents your professional skills and
+              achievements. Back your claims with certifications and portfolio
+              work.
             </p>
 
             <form onSubmit={handleSubmit} className="space-y-6">
@@ -70,7 +76,9 @@ const ClaimNFT = () => {
                 <input
                   type="text"
                   value={formData.skillTitle}
-                  onChange={(e) => setFormData({ ...formData, skillTitle: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, skillTitle: e.target.value })
+                  }
                   className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   placeholder="e.g. Smart Contract Development"
                 />
@@ -83,7 +91,9 @@ const ClaimNFT = () => {
                 </label>
                 <textarea
                   value={formData.description}
-                  onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, description: e.target.value })
+                  }
                   className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 h-32"
                   placeholder="Describe your experience and expertise in this skill..."
                 />
@@ -96,7 +106,12 @@ const ClaimNFT = () => {
                 </label>
                 <select
                   value={formData.experienceLevel}
-                  onChange={(e) => setFormData({ ...formData, experienceLevel: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      experienceLevel: e.target.value,
+                    })
+                  }
                   className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 >
                   <option value="beginner">Beginner</option>
@@ -143,7 +158,9 @@ const ClaimNFT = () => {
                       </label>
                       <p className="pl-1">or drag and drop</p>
                     </div>
-                    <p className="text-xs text-gray-500">PDF, PNG, JPG up to 10MB each</p>
+                    <p className="text-xs text-gray-500">
+                      PDF, PNG, JPG up to 10MB each
+                    </p>
                   </div>
                 </div>
               </div>
@@ -156,7 +173,9 @@ const ClaimNFT = () => {
                 <input
                   type="url"
                   value={formData.portfolio}
-                  onChange={(e) => setFormData({ ...formData, portfolio: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, portfolio: e.target.value })
+                  }
                   className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   placeholder="https://your-portfolio.com"
                 />
