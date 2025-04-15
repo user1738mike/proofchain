@@ -112,7 +112,7 @@ const ClaimNFT = () => {
                       experienceLevel: e.target.value,
                     })
                   }
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white"
                 >
                   <option value="beginner">Beginner</option>
                   <option value="intermediate">Intermediate</option>
