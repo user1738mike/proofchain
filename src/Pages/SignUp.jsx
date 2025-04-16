@@ -1,26 +1,39 @@
 import { useState } from "react";
-// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ShieldCheckIcon } from "@heroicons/react/24/outline";
 import AnimatedGrid from "../components/magicui/AnimatedGrid";
+import { useAuth } from "../contexts/AuthContext";
 
 export default function SignUp() {
   const [formData, setFormData] = useState({
+    name: "",
     email: "",
     password: "",
     acceptTerms: false,
   });
+  const [error, setError] = useState("");
+  const { register, googleLogin } = useAuth();
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission
-    console.log("Form submitted:", formData);
-  };
+    if (!formData.acceptTerms) {
+      setError("Please accept the terms and conditions");
+      return;
+    }
 
-  const handleOAuthSignIn = (provider) => {
-    // Handle OAuth sign in
-    console.log(`Signing in with ${provider}`);
+    const result = await register({
+      name: formData.name,
+      email: formData.email,
+      password: formData.password
+    });
+
+    if (result.success) {
+      navigate("/profile-setup");
+    } else {
+      setError(result.message);
+    }
   };
 
   return (
@@ -53,7 +66,29 @@ export default function SignUp() {
             Create your account
           </h2>
 
+          {error && (
+            <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
+              {error}
+            </div>
+          )}
+
           <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Full Name
+              </label>
+              <input
+                type="text"
+                value={formData.name}
+                onChange={(e) =>
+                  setFormData({ ...formData, name: e.target.value })
+                }
+                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                placeholder="Enter your full name"
+                required
+              />
+            </div>
+
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 Email
@@ -83,6 +118,7 @@ export default function SignUp() {
                 className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 placeholder="Create a password"
                 required
+                minLength={6}
               />
             </div>
 
@@ -128,26 +164,10 @@ export default function SignUp() {
               <div className="border-t border-gray-300 flex-grow"></div>
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4">
               <motion.button
                 type="button"
-                onClick={() => handleOAuthSignIn("github")}
-                className="flex items-center justify-center gap-2 py-2.5 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <svg className="h-5 w-5" viewBox="0 0 24 24">
-                  <path
-                    fill="currentColor"
-                    d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385c.6.105.825-.255.825-.57c0-.285-.015-1.23-.015-2.235c-3.015.555-3.795-.735-4.035-1.41c-.135-.345-.72-1.41-1.23-1.695c-.42-.225-1.02-.78-.015-.795c.945-.015 1.62.87 1.845 1.23c1.08 1.815 2.805 1.305 3.495.99c.105-.78.42-1.305.765-1.605c-2.67-.3-5.46-1.335-5.46-5.925c0-1.305.465-2.385 1.23-3.225c-.12-.3-.54-1.53.12-3.18c0 0 1.005-.315 3.3 1.23c.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23c.66 1.65.24 2.88.12 3.18c.765.84 1.23 1.905 1.23 3.225c0 4.605-2.805 5.625-5.475 5.925c.435.375.81 1.095.81 2.22c0 1.605-.015 2.895-.015 3.3c0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"
-                  />
-                </svg>
-                GitHub
-              </motion.button>
-
-              <motion.button
-                type="button"
-                onClick={() => handleOAuthSignIn("google")}
+                onClick={googleLogin}
                 className="flex items-center justify-center gap-2 py-2.5 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
@@ -170,7 +190,7 @@ export default function SignUp() {
                     fill="#EA4335"
                   />
                 </svg>
-                Google
+                Sign up with Google
               </motion.button>
             </div>
           </form>
@@ -182,15 +202,6 @@ export default function SignUp() {
               className="text-indigo-600 hover:text-indigo-500 font-medium"
             >
               Sign in
-            </Link>
-          </div>
-
-          <div className="mt-2 text-center">
-            <Link
-              to="/forgot-password"
-              className="text-sm text-indigo-600 hover:text-indigo-500"
-            >
-              Forgot your password?
             </Link>
           </div>
         </motion.div>
