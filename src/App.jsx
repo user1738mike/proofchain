@@ -13,16 +13,22 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/profile-setup" element={
-            <ProtectedRoute>
-              <ProfileSetup />
-            </ProtectedRoute>
-          } />
-          <Route path="/claim-nft" element={
-            <ProtectedRoute>
-              <ClaimNFT />
-            </ProtectedRoute>
-          } />
+          <Route
+            path="/profile-setup"
+            element={
+              <ProtectedRoute>
+                <ProfileSetup />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/claim-nft"
+            element={
+              <ProtectedRoute>
+                <ClaimNFT />
+              </ProtectedRoute>
+            }
+          />
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/signin" element={<SignIn />} />
         </Routes>
