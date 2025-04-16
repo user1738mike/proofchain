@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
 import { ShieldCheckIcon } from "@heroicons/react/24/outline";
 import AnimatedGrid from "../components/magicui/AnimatedGrid";
-import { useAuth } from "../contexts/AuthContext";
+import { useAuth } from "../hooks/useAuth";
 
 export default function SignIn() {
   const [formData, setFormData] = useState({
@@ -17,7 +17,7 @@ export default function SignIn() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
-    
+
     const result = await login(formData);
     if (result.success) {
       navigate("/profile-setup");
@@ -32,17 +32,54 @@ export default function SignIn() {
 
   return (
     <div className="min-h-screen bg-[#6bd6ff] relative overflow-hidden">
-      {/* Background Elements */}
       <AnimatedGrid />
 
       {/* Gradient corners */}
-      <div className="absolute top-0 left-0 w-96 h-96 bg-purple-900 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
-      <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-900 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-900 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"></div>
+      <motion.div
+        className="absolute top-0 left-0 w-96 h-96 bg-purple-900 rounded-full mix-blend-multiply filter blur-3xl opacity-20"
+        animate={{
+          scale: [1, 1.1, 1],
+          rotate: [0, 90, 0],
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+          ease: "linear",
+        }}
+      />
+      <motion.div
+        className="absolute top-0 right-0 w-96 h-96 bg-indigo-900 rounded-full mix-blend-multiply filter blur-3xl opacity-20"
+        animate={{
+          scale: [1.1, 1, 1.1],
+          rotate: [90, 0, 90],
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+          ease: "linear",
+          delay: 2,
+        }}
+      />
+      <motion.div
+        className="absolute bottom-0 left-0 w-96 h-96 bg-blue-900 rounded-full mix-blend-multiply filter blur-3xl opacity-20"
+        animate={{
+          scale: [1, 1.1, 1],
+          rotate: [180, 270, 180],
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+          ease: "linear",
+          delay: 4,
+        }}
+      />
 
       <div className="relative z-10 flex min-h-screen flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          <Link to="/" className="flex items-center gap-2 justify-center text-black font-bold text-lg mb-8">
+          <Link
+            to="/"
+            className="flex items-center gap-2 justify-center text-black font-bold text-lg mb-8"
+          >
             <ShieldCheckIcon className="h-6 w-6" />
             ProofChain
           </Link>
@@ -51,7 +88,7 @@ export default function SignIn() {
           </h2>
         </div>
 
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -78,7 +115,9 @@ export default function SignIn() {
                   type="email"
                   required
                   value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, email: e.target.value })
+                  }
                   className="block w-full rounded-lg bg-white/80 backdrop-blur-md px-3 py-2 text-black border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 />
               </div>
@@ -108,7 +147,9 @@ export default function SignIn() {
                   type="password"
                   required
                   value={formData.password}
-                  onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, password: e.target.value })
+                  }
                   className="block w-full rounded-lg bg-white/80 backdrop-blur-md px-3 py-2 text-black border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 />
               </div>
@@ -132,7 +173,9 @@ export default function SignIn() {
                 <div className="w-full border-t border-gray-300"></div>
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="bg-[#6bd6ff] px-2 text-black">Or continue with</span>
+                <span className="bg-[#6bd6ff] px-2 text-black">
+                  Or continue with
+                </span>
               </div>
             </div>
 

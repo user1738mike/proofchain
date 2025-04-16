@@ -1,7 +1,8 @@
-import { createContext, useContext, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { AuthContext } from './context';
 
-const AuthContext = createContext();
+const API_URL = 'http://localhost:5000/api/auth';
 
 export function AuthProvider({ children }) {
     const [user, setUser] = useState(null);
@@ -14,20 +15,25 @@ export function AuthProvider({ children }) {
     // Check if user is logged in
     const checkUser = async () => {
         try {
-            const res = await axios.get('http://localhost:5000/api/auth/me', {
+            const res = await axios.get(`${API_URL}/me`, {
                 withCredentials: true
             });
             setUser(res.data.data);
         } catch (error) {
             setUser(null);
+            // Only log actual errors, not unauthorized responses
+            if (error.response?.status !== 401) {
+                console.error('Error checking user status:', error);
+            }
+        } finally {
+            setLoading(false);
         }
-        setLoading(false);
     };
 
     // Register user
     const register = async (userData) => {
         try {
-            const res = await axios.post('http://localhost:5000/api/auth/register', userData, {
+            const res = await axios.post(`${API_URL}/register`, userData, {
                 withCredentials: true
             });
             setUser(res.data.user);
@@ -35,7 +41,7 @@ export function AuthProvider({ children }) {
         } catch (error) {
             return {
                 success: false,
-                message: error.response?.data?.message || 'Something went wrong'
+                message: error.response?.data?.message || 'Registration failed. Please try again.'
             };
         }
     };
@@ -43,7 +49,7 @@ export function AuthProvider({ children }) {
     // Login user
     const login = async (userData) => {
         try {
-            const res = await axios.post('http://localhost:5000/api/auth/login', userData, {
+            const res = await axios.post(`${API_URL}/login`, userData, {
                 withCredentials: true
             });
             setUser(res.data.user);
@@ -59,38 +65,75 @@ export function AuthProvider({ children }) {
     // Logout user
     const logout = async () => {
         try {
-            await axios.get('http://localhost:5000/api/auth/logout', {
+            await axios.get(`${API_URL}/logout`, {
                 withCredentials: true
             });
             setUser(null);
             return { success: true };
         } catch (error) {
+            console.error('Logout error:', error);
             return {
                 success: false,
-                message: error.response?.data?.message || 'Something went wrong'
+                message: error.response?.data?.message || 'Logout failed'
             };
         }
     };
 
     // Google OAuth login
     const googleLogin = () => {
-        window.location.href = 'http://localhost:5000/api/auth/google';
+        const width = 500;
+        const height = 600;
+        const left = window.screenX + (window.outerWidth - width) / 2;
+        const top = window.screenY + (window.outerHeight - height) / 2;
+        
+        const popup = window.open(
+            `${API_URL}/google`,
+            'Google Login',
+            `width=${width},height=${height},left=${left},top=${top}`
+        );
+
+        if (popup) {
+            // Poll the popup to check if it's closed
+            const checkPopup = setInterval(() => {
+                if (!popup || popup.closed) {
+                    clearInterval(checkPopup);
+                    checkUser(); // Check if user was authenticated
+                }
+            }, 1000);
+
+            // Handle success message from popup
+            const handleMessage = async (event) => {
+                // Check if the message is from our popup and contains oauth data
+                if (
+                    event.origin === window.location.origin && 
+                    event.data?.type === 'oauth-callback' &&
+                    event.data?.success
+                ) {
+                    clearInterval(checkPopup);
+                    window.removeEventListener('message', handleMessage);
+                    await checkUser();
+                }
+            };
+
+            window.addEventListener('message', handleMessage);
+        } else {
+            console.error('Failed to open Google login popup. Please check if popups are blocked.');
+        }
+    };
+
+    const value = {
+        user,
+        loading,
+        register,
+        login,
+        logout,
+        googleLogin,
+        refreshUser: checkUser
     };
 
     return (
-        <AuthContext.Provider value={{
-            user,
-            loading,
-            register,
-            login,
-            logout,
-            googleLogin
-        }}>
+        <AuthContext.Provider value={value}>
             {children}
         </AuthContext.Provider>
     );
-}
-
-export function useAuth() {
-    return useContext(AuthContext);
 }

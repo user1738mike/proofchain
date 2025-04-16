@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
 import { ShieldCheckIcon } from "@heroicons/react/24/outline";
 import AnimatedGrid from "../components/magicui/AnimatedGrid";
-import { useAuth } from "../contexts/AuthContext";
+import { useAuth } from "../hooks/useAuth";
 
 export default function SignUp() {
   const [formData, setFormData] = useState({
@@ -26,7 +26,7 @@ export default function SignUp() {
     const result = await register({
       name: formData.name,
       email: formData.email,
-      password: formData.password
+      password: formData.password,
     });
 
     if (result.success) {
@@ -38,13 +38,47 @@ export default function SignUp() {
 
   return (
     <div className="min-h-screen bg-[#6bd6ff] relative overflow-hidden">
-      {/* Background Elements */}
       <AnimatedGrid />
 
       {/* Gradient corners */}
-      <div className="absolute top-0 left-0 w-96 h-96 bg-purple-900 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
-      <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-900 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-900 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"></div>
+      <motion.div
+        className="absolute top-0 left-0 w-96 h-96 bg-purple-900 rounded-full mix-blend-multiply filter blur-3xl opacity-20"
+        animate={{
+          scale: [1, 1.1, 1],
+          rotate: [0, 90, 0],
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+          ease: "linear",
+        }}
+      />
+      <motion.div
+        className="absolute top-0 right-0 w-96 h-96 bg-indigo-900 rounded-full mix-blend-multiply filter blur-3xl opacity-20"
+        animate={{
+          scale: [1.1, 1, 1.1],
+          rotate: [90, 0, 90],
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+          ease: "linear",
+          delay: 2,
+        }}
+      />
+      <motion.div
+        className="absolute bottom-0 left-0 w-96 h-96 bg-blue-900 rounded-full mix-blend-multiply filter blur-3xl opacity-20"
+        animate={{
+          scale: [1, 1.1, 1],
+          rotate: [180, 270, 180],
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+          ease: "linear",
+          delay: 4,
+        }}
+      />
 
       <div className="relative z-10 flex flex-col items-center px-4 py-8">
         {/* Header */}

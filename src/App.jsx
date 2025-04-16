@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
+import ProtectedRoute from "./components/ProtectedRoute";
 import Home from "./Pages/Home";
 import ProfileSetup from "./Pages/ProfileSetup";
 import ClaimNFT from "./Pages/ClaimNFT";
@@ -12,8 +13,16 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/profile-setup" element={<ProfileSetup />} />
-          <Route path="/claim-nft" element={<ClaimNFT />} />
+          <Route path="/profile-setup" element={
+            <ProtectedRoute>
+              <ProfileSetup />
+            </ProtectedRoute>
+          } />
+          <Route path="/claim-nft" element={
+            <ProtectedRoute>
+              <ClaimNFT />
+            </ProtectedRoute>
+          } />
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/signin" element={<SignIn />} />
         </Routes>
