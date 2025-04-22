@@ -13,7 +13,7 @@ export default function ProtectedRoute({ children }) {
   }
 
   if (!user) {
-    return <Navigate to="/signin" replace />;
+    return <Navigate to="/sign-in" replace />;
   }
 
   return children;

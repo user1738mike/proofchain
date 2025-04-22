@@ -29,6 +29,29 @@ import {
   UseCasesContent,
 } from "../components/magicui/FlyoutMenu";
 
+const DrawOutlineButton = ({ children, ...rest }) => {
+  return (
+    <button
+      {...rest}
+      className="group relative px-4 py-2 font-medium text-slate-100 transition-colors duration-[400ms] hover:text-black"
+    >
+      <span>{children}</span>
+
+      {/* TOP */}
+      <span className="absolute left-0 top-0 h-[2px] w-0 bg-black transition-all duration-100 group-hover:w-full" />
+
+      {/* RIGHT */}
+      <span className="absolute right-0 top-0 h-0 w-[2px] bg-black transition-all delay-100 duration-100 group-hover:h-full" />
+
+      {/* BOTTOM */}
+      <span className="absolute bottom-0 right-0 h-[2px] w-0 bg-black transition-all delay-200 duration-100 group-hover:w-full" />
+
+      {/* LEFT */}
+      <span className="absolute bottom-0 left-0 h-0 w-[2px] bg-black transition-all delay-300 duration-100 group-hover:h-full" />
+    </button>
+  );
+};
+
 const navigation = [
   { name: "Solutions", href: "#", content: SolutionsContent },
   { name: "Use Cases", href: "#", content: UseCasesContent },
@@ -159,12 +182,9 @@ export default function App() {
             )}
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-            <a
-              href="#"
-              className="text-sm font-semibold text-black hover:underline"
-            >
-              Login →
-            </a>
+            <Link to="/sign-in">
+              <DrawOutlineButton>Login</DrawOutlineButton>
+            </Link>
           </div>
         </nav>
 
@@ -251,12 +271,9 @@ export default function App() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4 }}
                 >
-                  <a
-                    href="#"
-                    className="flex items-center justify-center w-full p-4 rounded-xl bg-indigo-600 text-white font-semibold hover:bg-indigo-500 transition-colors"
-                  >
-                    Login →
-                  </a>
+                  <Link to="/sign-in">
+                    <DrawOutlineButton>Login</DrawOutlineButton>
+                  </Link>
                 </motion.div>
               </div>
             </div>

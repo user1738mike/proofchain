@@ -32,7 +32,7 @@ function App() {
             }
           />
           <Route path="/sign-up" element={<SignUp />} />
-          <Route path="/signin" element={<SignIn />} />
+          <Route path="/sign-in" element={<SignIn />} />
         </Routes>
       </Router>
     </AuthProvider>
