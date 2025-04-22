@@ -4,6 +4,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import ScrollProgress from "./components/magicui/ScrollProgress";
 import Home from "./Pages/Home";
 import ProfileSetup from "./Pages/ProfileSetup";
+import WorkspaceSetup from "./Pages/WorkspaceSetup";
 import ClaimNFT from "./Pages/ClaimNFT";
 import SignUp from "./Pages/SignUp";
 import SignIn from "./Pages/SignIn";
@@ -15,6 +16,14 @@ function App() {
         <ScrollProgress />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route
+            path="/workspace-setup"
+            element={
+              <ProtectedRoute>
+                <WorkspaceSetup />
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="/profile-setup"
             element={

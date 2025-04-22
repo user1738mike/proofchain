@@ -23,7 +23,7 @@ export default function SignUp() {
     });
 
     if (result.success) {
-      navigate("/profile-setup");
+      navigate("/workspace-setup");
     }
   };
 
