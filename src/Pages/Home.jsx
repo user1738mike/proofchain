@@ -22,6 +22,7 @@ import VisionCards from "../components/VisionCards";
 import TextAnimate from "../components/magicui/TextAnimate";
 import PulsatingButton from "../components/magicui/PulsatingButton";
 import BentoGrid from "../components/magicui/BentoGrid";
+import AvatarCircles from "../components/magicui/AvatarCircles";
 import {
   FlyoutLink,
   SolutionsContent,
@@ -296,6 +297,8 @@ export default function App() {
               Explore the Protocol
             </Link>
           </motion.div>
+
+          <AvatarCircles />
         </div>
       </main>
 
