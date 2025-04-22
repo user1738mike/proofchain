@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { AuthContext } from "./context";
+import { useNavigate } from "react-router-dom";
 
 const API_URL = "http://localhost:5000/api/auth";
 
@@ -27,6 +28,7 @@ axiosInstance.interceptors.request.use(
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     checkUser();
@@ -118,7 +120,9 @@ export function AuthProvider({ children }) {
       const checkPopup = setInterval(() => {
         if (!popup || popup.closed) {
           clearInterval(checkPopup);
-          checkUser(); // Check if user was authenticated
+          checkUser().then(() => {
+            navigate("/workspace-setup");
+          });
         }
       }, 1000);
 
@@ -136,6 +140,7 @@ export function AuthProvider({ children }) {
             localStorage.setItem("token", event.data.token);
           }
           await checkUser();
+          navigate("/workspace-setup");
         }
       };
 
@@ -164,7 +169,9 @@ export function AuthProvider({ children }) {
       const checkPopup = setInterval(() => {
         if (!popup || popup.closed) {
           clearInterval(checkPopup);
-          checkUser();
+          checkUser().then(() => {
+            navigate("/workspace-setup");
+          });
         }
       }, 1000);
 
@@ -180,6 +187,7 @@ export function AuthProvider({ children }) {
             localStorage.setItem("token", event.data.token);
           }
           await checkUser();
+          navigate("/workspace-setup");
         }
       };
 

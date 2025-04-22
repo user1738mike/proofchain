@@ -19,7 +19,7 @@ export default function SignIn() {
 
     const result = await login(formData);
     if (result.success) {
-      navigate("/profile-setup");
+      navigate("/workspace-setup");
     } else {
       setError(result.message);
     }
