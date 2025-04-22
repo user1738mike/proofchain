@@ -125,6 +125,47 @@ export function AuthProvider({ children }) {
     }
   };
 
+  // GitHub OAuth login
+  const githubLogin = () => {
+    const width = 500;
+    const height = 600;
+    const left = window.screenX + (window.outerWidth - width) / 2;
+    const top = window.screenY + (window.outerHeight - height) / 2;
+
+    const popup = window.open(
+      `${API_URL}/github`,
+      "GitHub Login",
+      `width=${width},height=${height},left=${left},top=${top}`
+    );
+
+    if (popup) {
+      const checkPopup = setInterval(() => {
+        if (!popup || popup.closed) {
+          clearInterval(checkPopup);
+          checkUser();
+        }
+      }, 1000);
+
+      const handleMessage = async (event) => {
+        if (
+          event.origin === window.location.origin &&
+          event.data?.type === "oauth-callback" &&
+          event.data?.success
+        ) {
+          clearInterval(checkPopup);
+          window.removeEventListener("message", handleMessage);
+          await checkUser();
+        }
+      };
+
+      window.addEventListener("message", handleMessage);
+    } else {
+      console.error(
+        "Failed to open GitHub login popup. Please check if popups are blocked."
+      );
+    }
+  };
+
   const value = {
     user,
     loading,
@@ -132,6 +173,7 @@ export function AuthProvider({ children }) {
     login,
     logout,
     googleLogin,
+    githubLogin,
     refreshUser: checkUser,
   };
 
