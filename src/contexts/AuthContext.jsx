@@ -4,6 +4,26 @@ import { AuthContext } from "./context";
 
 const API_URL = "http://localhost:5000/api/auth";
 
+// Create axios instance with default config
+const axiosInstance = axios.create({
+  baseURL: API_URL,
+  withCredentials: true,
+});
+
+// Add interceptor to add token to requests
+axiosInstance.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -15,9 +35,7 @@ export function AuthProvider({ children }) {
   // Check if user is logged in
   const checkUser = async () => {
     try {
-      const res = await axios.get(`${API_URL}/me`, {
-        withCredentials: true,
-      });
+      const res = await axiosInstance.get("/me");
       setUser(res.data.data);
     } catch (error) {
       setUser(null);
@@ -33,10 +51,11 @@ export function AuthProvider({ children }) {
   // Register user
   const register = async (userData) => {
     try {
-      const res = await axios.post(`${API_URL}/register`, userData, {
-        withCredentials: true,
-      });
+      const res = await axiosInstance.post("/register", userData);
       setUser(res.data.user);
+      if (res.data.token) {
+        localStorage.setItem("token", res.data.token);
+      }
       return { success: true };
     } catch (error) {
       return {
@@ -51,10 +70,11 @@ export function AuthProvider({ children }) {
   // Login user
   const login = async (userData) => {
     try {
-      const res = await axios.post(`${API_URL}/login`, userData, {
-        withCredentials: true,
-      });
+      const res = await axiosInstance.post("/login", userData);
       setUser(res.data.user);
+      if (res.data.token) {
+        localStorage.setItem("token", res.data.token);
+      }
       return { success: true };
     } catch (error) {
       return {
@@ -67,10 +87,9 @@ export function AuthProvider({ children }) {
   // Logout user
   const logout = async () => {
     try {
-      await axios.get(`${API_URL}/logout`, {
-        withCredentials: true,
-      });
+      await axiosInstance.get("/logout");
       setUser(null);
+      localStorage.removeItem("token");
       return { success: true };
     } catch (error) {
       console.error("Logout error:", error);
@@ -113,6 +132,9 @@ export function AuthProvider({ children }) {
         ) {
           clearInterval(checkPopup);
           window.removeEventListener("message", handleMessage);
+          if (event.data.token) {
+            localStorage.setItem("token", event.data.token);
+          }
           await checkUser();
         }
       };
@@ -154,6 +176,9 @@ export function AuthProvider({ children }) {
         ) {
           clearInterval(checkPopup);
           window.removeEventListener("message", handleMessage);
+          if (event.data.token) {
+            localStorage.setItem("token", event.data.token);
+          }
           await checkUser();
         }
       };
