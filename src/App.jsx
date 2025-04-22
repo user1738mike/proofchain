@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
+import ScrollProgress from "./components/magicui/ScrollProgress";
 import Home from "./Pages/Home";
 import ProfileSetup from "./Pages/ProfileSetup";
 import ClaimNFT from "./Pages/ClaimNFT";
@@ -11,6 +12,7 @@ function App() {
   return (
     <AuthProvider>
       <Router>
+        <ScrollProgress />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route

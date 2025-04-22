@@ -5,19 +5,23 @@ import { motion } from "framer-motion";
 const users = [
   {
     name: "Alex Thompson",
-    image: "https://api.dicebear.com/7.x/lorelei/svg?seed=Alex&backgroundColor=b6e3f4",
+    image:
+      "https://api.dicebear.com/7.x/lorelei/svg?seed=Alex&backgroundColor=b6e3f4",
   },
   {
     name: "Maria Rodriguez",
-    image: "https://api.dicebear.com/7.x/lorelei/svg?seed=Maria&backgroundColor=ffdfbf",
+    image:
+      "https://api.dicebear.com/7.x/lorelei/svg?seed=Maria&backgroundColor=ffdfbf",
   },
   {
     name: "John Chen",
-    image: "https://api.dicebear.com/7.x/lorelei/svg?seed=John&backgroundColor=c1f0c1",
+    image:
+      "https://api.dicebear.com/7.x/lorelei/svg?seed=John&backgroundColor=c1f0c1",
   },
   {
     name: "Sarah Kumar",
-    image: "https://api.dicebear.com/7.x/lorelei/svg?seed=Sarah&backgroundColor=ffd5dc",
+    image:
+      "https://api.dicebear.com/7.x/lorelei/svg?seed=Sarah&backgroundColor=ffd5dc",
   },
 ];
 
