@@ -1,11 +1,10 @@
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { Eye } from 'lucide-react';
 import { Link, useNavigate } from "react-router-dom";
-import { ShieldCheckIcon } from "@heroicons/react/24/outline";
-import AnimatedGrid from "../components/magicui/AnimatedGrid";
 import { useAuth } from "../hooks/useAuth";
 
 export default function SignIn() {
+  const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -26,199 +25,120 @@ export default function SignIn() {
     }
   };
 
-  const handleGoogleLogin = () => {
-    googleLogin();
-  };
-
   return (
-    <div className="min-h-screen bg-[#6bd6ff] relative overflow-hidden">
-      <AnimatedGrid />
-
-      {/* Gradient corners */}
-      <motion.div
-        className="absolute top-0 left-0 w-96 h-96 bg-purple-900 rounded-full mix-blend-multiply filter blur-3xl opacity-20"
-        animate={{
-          scale: [1, 1.1, 1],
-          rotate: [0, 90, 0],
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: "linear",
-        }}
-      />
-      <motion.div
-        className="absolute top-0 right-0 w-96 h-96 bg-indigo-900 rounded-full mix-blend-multiply filter blur-3xl opacity-20"
-        animate={{
-          scale: [1.1, 1, 1.1],
-          rotate: [90, 0, 90],
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: "linear",
-          delay: 2,
-        }}
-      />
-      <motion.div
-        className="absolute bottom-0 left-0 w-96 h-96 bg-blue-900 rounded-full mix-blend-multiply filter blur-3xl opacity-20"
-        animate={{
-          scale: [1, 1.1, 1],
-          rotate: [180, 270, 180],
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: "linear",
-          delay: 4,
-        }}
-      />
-
-      <div className="relative z-10 flex min-h-screen flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          <Link
-            to="/"
-            className="flex items-center gap-2 justify-center text-black font-bold text-lg mb-8"
-          >
-            <ShieldCheckIcon className="h-6 w-6" />
-            ProofChain
-          </Link>
-          <h2 className="text-center text-2xl font-bold tracking-tight text-black">
-            Sign in to your account
-          </h2>
+    <div className="flex h-screen bg-black text-white">
+      {/* Left Side - Gradient Panel */}
+      <div className="w-1/2 bg-gradient-to-b from-purple-600 to-purple-900 flex flex-col items-center justify-center p-8">
+        <div className="flex items-center mb-6">
+          <div className="h-6 w-6 rounded-full border-2 border-white mr-2"></div>
+          <span className="font-medium">ProofChain</span>
         </div>
+        <h2 className="text-3xl font-bold mb-4">Welcome Back!</h2>
+        <p className="text-sm text-center mb-8">Sign in to continue your journey with us.</p>
+        
+        <div className="w-full max-w-xs space-y-3">
+          <button className="w-full bg-white text-black rounded-full py-3 px-4 font-medium flex items-center justify-center">
+            <span className="h-4 w-4 bg-black rounded-full mr-2 flex items-center justify-center text-white text-xs">1</span>
+            Sign in to your account
+          </button>
+          
+          <button className="w-full bg-black bg-opacity-20 rounded-full py-3 px-4 font-medium flex items-center justify-center">
+            <span className="h-4 w-4 bg-white bg-opacity-20 rounded-full mr-2 flex items-center justify-center text-xs">2</span>
+            Access your workspace
+          </button>
+          
+          <button className="w-full bg-black bg-opacity-20 rounded-full py-3 px-4 font-medium flex items-center justify-center">
+            <span className="h-4 w-4 bg-white bg-opacity-20 rounded-full mr-2 flex items-center justify-center text-xs">3</span>
+            View your portfolio
+          </button>
+        </div>
+      </div>
+      
+      {/* Right Side - Form */}
+      <div className="w-1/2 flex items-center justify-center">
+        <div className="w-full max-w-md px-8">
+          <h1 className="text-xl font-bold mb-1">Sign In to Account</h1>
+          <p className="text-sm text-gray-400 mb-6">Welcome back! Please enter your credentials.</p>
+          
+          <div className="flex gap-4 mb-4">
+            <button 
+              onClick={googleLogin}
+              className="flex-1 border border-gray-700 rounded py-2 px-4 flex items-center justify-center gap-2 hover:bg-gray-900 transition-colors"
+            >
+              <img src="https://www.google.com/favicon.ico" alt="Google" className="w-5 h-5" />
+              Google
+            </button>
+            <button className="flex-1 border border-gray-700 rounded py-2 px-4 flex items-center justify-center gap-2 hover:bg-gray-900 transition-colors">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="white" aria-hidden="true">
+                <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.463 2 11.97c0 4.404 2.865 8.14 6.839 9.458.5.092.682-.216.682-.48 0-.236-.008-.864-.013-1.695-2.782.602-3.369-1.337-3.369-1.337-.454-1.151-1.11-1.458-1.11-1.458-.908-.618.069-.606.069-.606 1.003.07 1.531 1.027 1.531 1.027.892 1.524 2.341 1.084 2.91.828.092-.643.35-1.083.636-1.332-2.22-.251-4.555-1.107-4.555-4.927 0-1.088.39-1.979 1.029-2.675-.103-.252-.446-1.266.098-2.638 0 0 .84-.268 2.75 1.022A9.607 9.607 0 0112 6.82c.85.004 1.705.114 2.504.336 1.909-1.29 2.747-1.022 2.747-1.022.546 1.372.202 2.386.1 2.638.64.696 1.028 1.587 1.028 2.675 0 3.83-2.339 4.673-4.566 4.92.359.307.678.915.678 1.846 0 1.332-.012 2.407-.012 2.734 0 .267.18.577.688.48C19.137 20.107 22 16.373 22 11.969 22 6.463 17.522 2 12 2z"></path>
+              </svg>
+              Github
+            </button>
+          </div>
+          
+          <div className="flex items-center gap-2 my-6">
+            <div className="flex-1 h-px bg-gray-800"></div>
+            <span className="text-sm text-gray-500">Or</span>
+            <div className="flex-1 h-px bg-gray-800"></div>
+          </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm"
-        >
           {error && (
-            <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
+            <div className="mb-4 p-3 bg-red-900/20 border border-red-500/50 text-red-400 rounded text-sm">
               {error}
             </div>
           )}
-
-          <form onSubmit={handleSubmit} className="space-y-6">
+          
+          <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium text-black"
-              >
-                Email address
-              </label>
-              <div className="mt-2">
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  required
-                  value={formData.email}
-                  onChange={(e) =>
-                    setFormData({ ...formData, email: e.target.value })
-                  }
-                  className="block w-full rounded-lg bg-white/80 backdrop-blur-md px-3 py-2 text-black border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                />
-              </div>
+              <label className="block text-sm mb-1">Email</label>
+              <input 
+                type="email"
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                placeholder="Enter your email" 
+                className="w-full bg-black border border-gray-800 rounded p-2 text-sm focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-colors"
+                required
+              />
             </div>
-
+            
             <div>
-              <div className="flex items-center justify-between">
-                <label
-                  htmlFor="password"
-                  className="block text-sm font-medium text-black"
-                >
-                  Password
-                </label>
-                <div className="text-sm">
-                  <Link
-                    to="/forgot-password"
-                    className="font-semibold text-indigo-600 hover:text-indigo-500"
-                  >
-                    Forgot password?
-                  </Link>
-                </div>
+              <div className="flex items-center justify-between mb-1">
+                <label className="block text-sm">Password</label>
+                <Link to="/forgot-password" className="text-sm text-purple-500 hover:text-purple-400 transition-colors">
+                  Forgot password?
+                </Link>
               </div>
-              <div className="mt-2">
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  required
+              <div className="relative">
+                <input 
+                  type={showPassword ? "text" : "password"}
                   value={formData.password}
-                  onChange={(e) =>
-                    setFormData({ ...formData, password: e.target.value })
-                  }
-                  className="block w-full rounded-lg bg-white/80 backdrop-blur-md px-3 py-2 text-black border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                  placeholder="Enter your password" 
+                  className="w-full bg-black border border-gray-800 rounded p-2 text-sm pr-10 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-colors"
+                  required
                 />
+                <button 
+                  type="button"
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 hover:text-purple-500 transition-colors"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  <Eye size={16} className="text-gray-500" />
+                </button>
               </div>
             </div>
-
-            <div>
-              <motion.button
-                type="submit"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="flex w-full justify-center rounded-lg bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              >
-                Sign in
-              </motion.button>
-            </div>
-          </form>
-
-          <div className="mt-6">
-            <div className="relative">
-              <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-gray-300"></div>
-              </div>
-              <div className="relative flex justify-center text-sm">
-                <span className="bg-[#6bd6ff] px-2 text-black">
-                  Or continue with
-                </span>
-              </div>
-            </div>
-
-            <div className="mt-6">
-              <motion.button
-                onClick={handleGoogleLogin}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="flex w-full items-center justify-center gap-3 rounded-lg bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-              >
-                <svg className="h-5 w-5" viewBox="0 0 24 24">
-                  <path
-                    d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
-                    fill="#4285F4"
-                  />
-                  <path
-                    d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
-                    fill="#34A853"
-                  />
-                  <path
-                    d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
-                    fill="#FBBC05"
-                  />
-                  <path
-                    d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
-                    fill="#EA4335"
-                  />
-                </svg>
-                Sign in with Google
-              </motion.button>
-            </div>
-          </div>
-
-          <p className="mt-10 text-center text-sm text-black">
-            Not a member?{" "}
-            <Link
-              to="/sign-up"
-              className="font-semibold text-indigo-600 hover:text-indigo-500"
+            
+            <button 
+              type="submit"
+              className="w-full bg-white text-black rounded py-2 font-medium mt-2 hover:bg-gray-100 transition-colors"
             >
-              Sign up now
-            </Link>
-          </p>
-        </motion.div>
+              Sign In
+            </button>
+            
+            <p className="text-sm text-center">
+              Don't have an account? <Link to="/sign-up" className="text-purple-500 hover:text-purple-400 transition-colors">Sign up</Link>
+            </p>
+          </form>
+        </div>
       </div>
     </div>
   );
