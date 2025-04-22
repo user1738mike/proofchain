@@ -5,6 +5,8 @@ import { useAuth } from "../hooks/useAuth";
 
 export default function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -14,16 +16,55 @@ export default function SignUp() {
   const { register, googleLogin, githubLogin } = useAuth();
   const navigate = useNavigate();
 
+  const validateForm = () => {
+    if (!formData.firstName.trim()) {
+      setError("First name is required");
+      return false;
+    }
+    if (!formData.lastName.trim()) {
+      setError("Last name is required");
+      return false;
+    }
+    if (!formData.email.trim()) {
+      setError("Email is required");
+      return false;
+    }
+    if (!formData.password) {
+      setError("Password is required");
+      return false;
+    }
+    if (formData.password.length < 6) {
+      setError("Password must be at least 6 characters long");
+      return false;
+    }
+    return true;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const result = await register({
-      name: `${formData.firstName} ${formData.lastName}`,
-      email: formData.email,
-      password: formData.password,
-    });
+    setError("");
 
-    if (result.success) {
-      navigate("/workspace-setup");
+    if (!validateForm()) {
+      return;
+    }
+
+    setIsLoading(true);
+    try {
+      const result = await register({
+        name: `${formData.firstName} ${formData.lastName}`,
+        email: formData.email,
+        password: formData.password,
+      });
+
+      if (result.success) {
+        navigate("/workspace-setup");
+      } else {
+        setError(result.message || "Registration failed. Please try again.");
+      }
+    } catch (err) {
+      setError("An unexpected error occurred. Please try again.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -75,7 +116,8 @@ export default function SignUp() {
           <div className="flex gap-4 mb-4">
             <button
               onClick={googleLogin}
-              className="flex-1 border border-gray-700 rounded py-2 px-4 flex items-center justify-center gap-2 hover:bg-gray-900 transition-colors"
+              disabled={isLoading}
+              className="flex-1 border border-gray-700 rounded py-2 px-4 flex items-center justify-center gap-2 hover:bg-gray-900 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <img
                 src="https://www.google.com/favicon.ico"
@@ -86,7 +128,8 @@ export default function SignUp() {
             </button>
             <button
               onClick={githubLogin}
-              className="flex-1 border border-gray-700 rounded py-2 px-4 flex items-center justify-center gap-2 hover:bg-gray-900 transition-colors"
+              disabled={isLoading}
+              className="flex-1 border border-gray-700 rounded py-2 px-4 flex items-center justify-center gap-2 hover:bg-gray-900 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <svg
                 viewBox="0 0 24 24"
@@ -111,6 +154,12 @@ export default function SignUp() {
             <div className="flex-1 h-px bg-gray-800"></div>
           </div>
 
+          {error && (
+            <div className="mb-4 p-3 bg-red-900/20 border border-red-500/50 text-red-400 rounded text-sm">
+              {error}
+            </div>
+          )}
+
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
               <div>
@@ -124,6 +173,7 @@ export default function SignUp() {
                   placeholder="eg. John"
                   className="w-full bg-black border border-gray-800 rounded p-2 text-sm focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-colors"
                   required
+                  disabled={isLoading}
                 />
               </div>
               <div>
@@ -137,6 +187,7 @@ export default function SignUp() {
                   placeholder="eg. Francisco"
                   className="w-full bg-black border border-gray-800 rounded p-2 text-sm focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-colors"
                   required
+                  disabled={isLoading}
                 />
               </div>
             </div>
@@ -152,6 +203,7 @@ export default function SignUp() {
                 placeholder="eg. johnfrancis@gmail.com"
                 className="w-full bg-black border border-gray-800 rounded p-2 text-sm focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-colors"
                 required
+                disabled={isLoading}
               />
             </div>
 
@@ -167,26 +219,29 @@ export default function SignUp() {
                   placeholder="Enter your password"
                   className="w-full bg-black border border-gray-800 rounded p-2 text-sm pr-10 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-colors"
                   required
-                  minLength={8}
+                  minLength={6}
+                  disabled={isLoading}
                 />
                 <button
                   type="button"
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 hover:text-purple-500 transition-colors"
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 hover:text-purple-500 transition-colors disabled:opacity-50"
                   onClick={() => setShowPassword(!showPassword)}
+                  disabled={isLoading}
                 >
                   <Eye size={16} className="text-gray-500" />
                 </button>
               </div>
               <p className="text-xs text-gray-500 mt-1">
-                Must be at least 8 characters.
+                Must be at least 6 characters.
               </p>
             </div>
 
             <button
               type="submit"
-              className="w-full bg-white text-black rounded py-2 font-medium mt-2 hover:bg-gray-100 transition-colors"
+              disabled={isLoading}
+              className="w-full bg-white text-black rounded py-2 font-medium mt-2 hover:bg-gray-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Sign Up
+              {isLoading ? "Creating Account..." : "Sign Up"}
             </button>
 
             <p className="text-sm text-center">
